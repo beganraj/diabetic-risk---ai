@@ -1,0 +1,59 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Environment Variables & Secrets
+.env
+.env.local
+
+# Databases & SQLite
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# IDEs & Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Project Documentation, College Insignia & Historical Drafts
+docs/DiaGuard_Project_Report.docx
+docs/DiaGuard_Project_Report.pdf
+docs/college_logo.png
+college_logo.png
+docs/previous_version/
+docs/reference/
+docs/README.md
+
+# Academic Report Builder Scripts
+docs/apply_full_reference_alignment.py
+docs/apply_image_resize_and_cleanup.py
+docs/apply_reference_alignment.py
+docs/build_complete_report.py
+docs/calibrate_appendix1.py
+docs/capture_extra_playwright.py
+docs/capture_extra_screens.py
+docs/capture_screenshots.py
+docs/expand_appendix1.py
+docs/expand_report.py
+docs/expand_v2.py
+docs/extract_protected_xml.py
+docs/generate_all_diagrams.py
+docs/get_model_metrics.py
+docs/test_resize_experiment.py
+docs/verify_report.py

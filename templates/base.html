@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Diabetes Risk Prediction System{% endblock %}</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Anti-flash inline theme loader -->
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('diaguard_theme');
+                if (savedTheme === 'dark' || savedTheme === 'light') {
+                    document.documentElement.setAttribute('data-bs-theme', savedTheme);
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', 'light');
+                }
+            } catch (e) {
+                document.documentElement.setAttribute('data-bs-theme', 'light');
+            }
+        })();
+    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-xl navbar-custom sticky-top">
+        <div class="container-fluid px-3 px-xl-4">
+            <a class="navbar-brand d-inline-flex align-items-center fw-bold me-3" href="{{ url_for('index') }}">
+                <span class="brand-icon"><i class="bi bi-heart-pulse-fill"></i></span>
+                <span>DiaGuard<span class="text-primary">.ai</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto align-items-xl-center my-2 my-xl-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}"><i class="bi bi-house"></i><span>Home</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'quick_check' %}active{% endif %}" href="{{ url_for('quick_check') }}"><i class="bi bi-clipboard2-check"></i><span>Check Risk</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'food_consultant' %}active{% endif %}" href="{{ url_for('food_consultant') }}"><i class="bi bi-egg-fried"></i><span>Food Consultant</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'about_diabetes' %}active{% endif %}" href="{{ url_for('about_diabetes') }}"><i class="bi bi-book-half"></i><span>About Diabetes</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'faq' %}active{% endif %}" href="{{ url_for('faq') }}"><i class="bi bi-question-circle"></i><span>FAQ</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'about_project' %}active{% endif %}" href="{{ url_for('about_project') }}"><i class="bi bi-info-circle"></i><span>About Project</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'about_model' %}active{% endif %}" href="{{ url_for('about_model') }}"><i class="bi bi-cpu"></i><span>Model</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'history' %}active{% endif %}" href="{{ url_for('history') }}"><i class="bi bi-clock-history"></i><span>History</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint in ['admin_dashboard', 'admin_login'] %}active{% endif %}" href="{{ url_for('admin_dashboard') }}"><i class="bi bi-shield-lock"></i><span>Admin</span></a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 ms-xl-2 pt-2 pt-xl-0">
+                    <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle theme-toggle-btn" id="theme-toggle" aria-label="Switch to dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Switch to dark mode">
+                        <i class="bi bi-moon-stars-fill" id="theme-toggle-icon"></i>
+                    </button>
+                    <a class="btn btn-sm btn-primary rounded-pill px-3 shadow-sm nav-cta-btn" href="{{ url_for('quick_check') }}">Take Test</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="container mt-3">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-custom border-top py-4 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="brand-icon" style="width:30px;height:30px;font-size:0.85rem;"><i class="bi bi-heart-pulse-fill"></i></span>
+                        <span class="fw-bold">Diabetes Risk Prediction System</span>
+                        <span class="badge badge-subtle">&copy; 2026</span>
+                    </div>
+                    <p class="text-secondary small mt-2 mb-0">
+                        An early clinical and lifestyle risk screening system developed for academic and health-informatics demonstration.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex flex-wrap gap-3 justify-content-md-end small fw-medium">
+                        <a href="{{ url_for('index') }}" class="text-decoration-none footer-link">Home</a>
+                        <a href="{{ url_for('about_diabetes') }}" class="text-decoration-none footer-link">About Diabetes</a>
+                        <a href="{{ url_for('faq') }}" class="text-decoration-none footer-link">FAQ</a>
+                        <a href="{{ url_for('about_project') }}" class="text-decoration-none footer-link">About Project</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3 opacity-25">
+            <div class="text-center text-secondary small">
+                <strong>Medical Disclaimer:</strong> This is not a medical diagnosis. Please consult a doctor. This tool is developed strictly for early screening and educational awareness.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

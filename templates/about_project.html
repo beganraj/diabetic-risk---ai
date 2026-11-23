@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}About Project - DiaGuard.ai{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Project Header & Objective -->
+    <div class="card app-card p-4 p-md-5 mb-4 border-primary border-opacity-25 bg-gradient">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1 rounded-pill mb-2 fw-semibold" style="width: fit-content;">
+            Health Informatics Project
+        </span>
+        <h1 class="display-6 fw-bold text-dark mb-2">Diabetes Risk Prediction System (DiaGuard.ai)</h1>
+        <p class="lead text-secondary fs-6 mb-0" style="max-width: 800px;">
+            An accessible web-based preventive health screener designed to evaluate an individual's early risk indicators for Type 2 diabetes using non-invasive lifestyle parameters and machine learning models trained on clinical biomarker data.
+        </p>
+    </div>
+
+    <!-- Medical Disclaimer Alert -->
+    <div class="alert alert-warning border-warning-subtle d-flex align-items-center py-2 px-3 rounded-3 mb-4 shadow-sm" role="alert">
+        <i class="bi bi-info-circle-fill text-warning fs-5 me-2 flex-shrink-0"></i>
+        <div class="small">
+            <strong>Medical Disclaimer:</strong> This is not a medical diagnosis. Please consult a doctor. This project is built for educational demonstration and screening prototype purposes.
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <!-- Problem Statement -->
+        <div class="col-md-6">
+            <div class="card app-card p-4 h-100 border-start border-4 border-primary">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="brand-icon me-3" style="background:#dbeafe; color:#2563eb; width:44px; height:44px; font-size:1.3rem;">
+                        <i class="bi bi-heart-pulse-fill"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark mb-0">Problem Statement</h5>
+                </div>
+                <p class="text-secondary small mb-2">
+                    Type 2 diabetes often develops silently over years without noticeable discomfort. Millions of individuals live with elevated blood sugar (prediabetes) without knowing it, missing the crucial window where lifestyle adjustments can reverse or halt disease progression.
+                </p>
+                <p class="text-secondary small mb-0">
+                    Traditional clinical laboratory testing requires scheduled visits, needle draws, and expense. Providing a simple, accessible early screener allows individuals to identify their personal risk factors early and seek timely medical evaluation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="col-md-6">
+            <div class="card app-card p-4 h-100 border-start border-4 border-success">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="brand-icon me-3" style="background:#dcfce7; color:#10b981; width:44px; height:44px; font-size:1.3rem;">
+                        <i class="bi bi-stack"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark mb-0">Technology Stack</h5>
+                </div>
+                <p class="text-secondary small mb-3">
+                    Built using a lightweight, performant stack focused on interpretable machine learning and responsive interfaces:
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    <span class="badge bg-primary px-3 py-2 rounded-pill"><i class="bi bi-filetype-py me-1"></i> Python</span>
+                    <span class="badge bg-dark px-3 py-2 rounded-pill"><i class="bi bi-server me-1"></i> Flask</span>
+                    <span class="badge bg-success px-3 py-2 rounded-pill"><i class="bi bi-cpu me-1"></i> scikit-learn</span>
+                    <span class="badge bg-info text-dark px-3 py-2 rounded-pill"><i class="bi bi-database me-1"></i> SQLite</span>
+                    <span class="badge bg-primary-subtle text-primary border px-3 py-2 rounded-pill"><i class="bi bi-bootstrap me-1"></i> Bootstrap</span>
+                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill"><i class="bi bi-pie-chart me-1"></i> Chart.js</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dataset & How Prediction Works -->
+    <div class="row g-4 mb-4">
+        <!-- Dataset Used -->
+        <div class="col-12">
+            <div class="card app-card p-4">
+                <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-database-check text-primary fs-4 me-2"></i>
+                    <h5 class="fw-bold text-dark mb-0">Dataset Used</h5>
+                </div>
+                <p class="text-secondary small mb-0">
+                    <strong>Pima Indians Diabetes Database:</strong> A widely recognized clinical benchmark dataset consisting of 768 patient records with 8 biological markers (Pregnancies, Glucose, Blood Pressure, Skin Thickness, Insulin, BMI, Diabetes Pedigree, and Age) used to train, test, and benchmark candidate classification algorithms.
+                </p>
+            </div>
+        </div>
+
+        <!-- How the Prediction Works (4 Steps) -->
+        <div class="col-12">
+            <div class="card app-card p-4">
+                <h5 class="fw-bold text-dark mb-3 text-center">
+                    <i class="bi bi-diagram-3 text-primary me-2"></i>How the Prediction Works in 4 Simple Steps
+                </h5>
+
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="p-3 rounded-3 bg-light border text-center h-100">
+                            <div class="brand-icon mx-auto mb-2" style="background:#dbeafe; color:#2563eb; width:42px; height:42px;">
+                                <strong>1</strong>
+                            </div>
+                            <h6 class="fw-bold mb-1">Questionnaire</h6>
+                            <p class="text-muted small mb-0">The user enters everyday lifestyle factors, age, family history, and symptoms without medical jargon.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 rounded-3 bg-light border text-center h-100">
+                            <div class="brand-icon mx-auto mb-2" style="background:#dcfce7; color:#10b981; width:42px; height:42px;">
+                                <strong>2</strong>
+                            </div>
+                            <h6 class="fw-bold mb-1">BMI Calculation</h6>
+                            <p class="text-muted small mb-0">Height and weight inputs instantly compute Body Mass Index (BMI) and assign the clinical category.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 rounded-3 bg-light border text-center h-100">
+                            <div class="brand-icon mx-auto mb-2" style="background:#fef3c7; color:#d97706; width:42px; height:42px;">
+                                <strong>3</strong>
+                            </div>
+                            <h6 class="fw-bold mb-1">Model Prediction</h6>
+                            <p class="text-muted small mb-0">The trained machine learning classifier evaluates biomarker weights to compute an estimated risk score.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 rounded-3 bg-light border text-center h-100">
+                            <div class="brand-icon mx-auto mb-2" style="background:#fee2e2; color:#ef4444; width:42px; height:42px;">
+                                <strong>4</strong>
+                            </div>
+                            <h6 class="fw-bold mb-1">Risk Level with Tips</h6>
+                            <p class="text-muted small mb-0">Outputs a categorized risk score (Low, Medium, High) with top contributing factors and diet/exercise tips.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features of the Project -->
+        <div class="col-12">
+            <div class="card app-card p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-stars text-warning fs-4 me-2"></i>
+                    <h5 class="fw-bold text-dark mb-0">Key Features of the Project</h5>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <ul class="text-secondary small ps-3 mb-0">
+                            <li class="mb-2"><strong>Dual Assessment Modes:</strong> Plain-language lifestyle questionnaire (Quick Check) and lab marker ML classifier (Detailed Check).</li>
+                            <li class="mb-2"><strong>Explainable Predictions:</strong> Identifies and highlights the top 3 contributing factors with one-line biological explanations.</li>
+                            <li class="mb-2"><strong>Dynamic Chart.js Visualizations:</strong> Semi-circle risk score gauge, horizontal BMI comparison chart, and history risk trend lines.</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="text-secondary small ps-3 mb-0">
+                            <li class="mb-2"><strong>Personalized 7-Day Plans:</strong> Tailored diet and exercise suggestions with an instant English / Tamil language toggle.</li>
+                            <li class="mb-2"><strong>Downloadable Clinical PDF:</strong> One-click generation of a clean clinical summary report for physician review.</li>
+                            <li class="mb-2"><strong>Local History & Admin Dashboard:</strong> SQLite-backed assessment history logging and administrator metric analytics.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

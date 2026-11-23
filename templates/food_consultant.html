@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block title %}Food Consultant - South Indian Diet Advice | DiaGuard.ai{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="row justify-content-center text-center mb-4">
+        <div class="col-lg-8">
+            <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill fw-semibold mb-2">
+                <i class="bi bi-egg-fried me-1"></i> Personalized Nutrition Guidance
+            </span>
+            <h1 class="h2 fw-bold text-dark">South Indian Food Consultant</h1>
+            <p class="text-muted">
+                Receive evidence-informed, South Indian dietary recommendations tailored to your risk level, BMI category, food preference, and health goal.
+            </p>
+        </div>
+    </div>
+
+    <!-- Safety Disclaimer Alert -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-10">
+            <div class="alert alert-info border-info d-flex align-items-center rounded-3 p-3 shadow-sm mb-0">
+                <i class="bi bi-shield-exclamation fs-3 text-info me-3 flex-shrink-0"></i>
+                <div class="small">
+                    <strong>Medical Notice:</strong> This is general diet guidance, not a medical prescription. Please consult a doctor or dietitian before making substantial dietary changes.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form & Input Card -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    <h5 class="fw-bold mb-3 d-flex align-items-center text-dark">
+                        <i class="bi bi-sliders text-primary me-2"></i> Your Health Profile & Food Preferences
+                    </h5>
+                    <p class="text-secondary small mb-4">
+                        If you recently took an assessment, your risk level and BMI category are auto-filled below. You can also adjust the dropdowns manually.
+                    </p>
+
+                    <form method="POST" action="{{ url_for('food_consultant') }}" id="foodConsultantForm">
+                        <div class="row g-3">
+                            <!-- Risk Level Dropdown -->
+                            <div class="col-md-6 col-lg-3">
+                                <label for="risk_level" class="form-label fw-semibold small text-muted">
+                                    <i class="bi bi-heart-pulse text-danger me-1"></i> Risk Level
+                                </label>
+                                <select class="form-select" id="risk_level" name="risk_level" required>
+                                    <option value="Low" {% if selected_risk == 'Low' %}selected{% endif %}>Low Risk</option>
+                                    <option value="Medium" {% if selected_risk == 'Medium' %}selected{% endif %}>Medium Risk</option>
+                                    <option value="High" {% if selected_risk == 'High' %}selected{% endif %}>High Risk</option>
+                                </select>
+                            </div>
+
+                            <!-- BMI Category Dropdown -->
+                            <div class="col-md-6 col-lg-3">
+                                <label for="bmi_category" class="form-label fw-semibold small text-muted">
+                                    <i class="bi bi-speedometer2 text-info me-1"></i> BMI Category
+                                </label>
+                                <select class="form-select" id="bmi_category" name="bmi_category" required>
+                                    <option value="Normal" {% if selected_bmi_cat == 'Normal' %}selected{% endif %}>Normal (18.5 - 24.9)</option>
+                                    <option value="Overweight" {% if selected_bmi_cat == 'Overweight' %}selected{% endif %}>Overweight (25 - 29.9)</option>
+                                    <option value="Obese" {% if selected_bmi_cat == 'Obese' %}selected{% endif %}>Obese (30+)</option>
+                                    <option value="Underweight" {% if selected_bmi_cat == 'Underweight' %}selected{% endif %}>Underweight (< 18.5)</option>
+                                </select>
+                            </div>
+
+                            <!-- Food Type Preference -->
+                            <div class="col-md-6 col-lg-3">
+                                <label for="food_type" class="form-label fw-semibold small text-muted">
+                                    <i class="bi bi-basket2 text-success me-1"></i> Food Type
+                                </label>
+                                <select class="form-select" id="food_type" name="food_type" required>
+                                    <option value="Vegetarian" {% if selected_food_type == 'Vegetarian' %}selected{% endif %}>Vegetarian</option>
+                                    <option value="Non-vegetarian" {% if selected_food_type == 'Non-vegetarian' %}selected{% endif %}>Non-vegetarian</option>
+                                    <option value="Eggetarian" {% if selected_food_type == 'Eggetarian' %}selected{% endif %}>Eggetarian</option>
+                                </select>
+                            </div>
+
+                            <!-- Dietary Goal -->
+                            <div class="col-md-6 col-lg-3">
+                                <label for="goal" class="form-label fw-semibold small text-muted">
+                                    <i class="bi bi-bullseye text-warning me-1"></i> Primary Goal
+                                </label>
+                                <select class="form-select" id="goal" name="goal" required>
+                                    <option value="Prevent diabetes" {% if selected_goal == 'Prevent diabetes' %}selected{% endif %}>Prevent diabetes</option>
+                                    <option value="Control sugar" {% if selected_goal == 'Control sugar' %}selected{% endif %}>Control sugar</option>
+                                    <option value="Lose weight" {% if selected_goal == 'Lose weight' %}selected{% endif %}>Lose weight</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-center text-md-end">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4 py-2 shadow-sm fw-semibold">
+                                <i class="bi bi-magic me-1"></i> Generate Recommendations
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recommendations Output Section -->
+    {% if recommendations %}
+    <div id="resultsSection" class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <!-- High Risk Critical Caution Note -->
+            {% if recommendations.is_high_risk %}
+            <div class="alert alert-danger border-danger d-flex align-items-center rounded-3 p-3 shadow-sm mb-4">
+                <i class="bi bi-exclamation-triangle-fill fs-2 text-danger me-3 flex-shrink-0"></i>
+                <div>
+                    <h6 class="fw-bold mb-1 text-danger">High Clinical Risk Flagged</h6>
+                    <p class="small mb-0">
+                        Because your risk level is <strong>High</strong>, please consult a qualified doctor or clinical dietitian before altering your diet or medication plan. Dietary modifications must complement medical evaluation.
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Active Profile Summary Header -->
+            <div class="card border-0 bg-light rounded-3 p-3 mb-4 shadow-sm">
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+                    <div>
+                        <span class="text-muted small">Current Plan Criteria:</span>
+                        <div class="mt-1">
+                            <span class="badge {% if recommendations.user_summary.risk_level == 'High' %}bg-danger{% elif recommendations.user_summary.risk_level == 'Medium' %}bg-warning text-dark{% else %}bg-success{% endif %} me-1">
+                                Risk: {{ recommendations.user_summary.risk_level }}
+                            </span>
+                            <span class="badge bg-secondary me-1">BMI: {{ recommendations.user_summary.bmi_category }}</span>
+                            <span class="badge bg-info text-dark me-1">Diet: {{ recommendations.user_summary.food_type }}</span>
+                            <span class="badge bg-dark">Goal: {{ recommendations.user_summary.goal }}</span>
+                        </div>
+                    </div>
+                    {% if recommendations.bmi_note %}
+                    <div class="col-12 mt-2 pt-2 border-top">
+                        <small class="text-secondary"><i class="bi bi-info-circle me-1"></i><strong>BMI Tip:</strong> {{ recommendations.bmi_note }}</small>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- 3 Category Cards: Eat More, Limit, Avoid -->
+            <div class="row g-4 mb-4 align-items-stretch">
+                <!-- Foods to Eat More -->
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 food-card food-card-more">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-success mb-3 d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill me-2 fs-5"></i> Foods to Eat More
+                            </h5>
+                            <ul class="list-unstyled mb-0">
+                                {% for item in recommendations.foods_to_eat_more %}
+                                <li class="food-item-divider">
+                                    <strong class="d-block text-dark">{{ item.name }}</strong>
+                                    <div class="small text-muted mb-1">{{ item.detail }}</div>
+                                    <span class="food-reason-tag bg-success-subtle text-success">{{ item.benefit }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foods to Limit -->
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 food-card food-card-limit">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-warning-emphasis mb-3 d-flex align-items-center">
+                                <i class="bi bi-exclamation-circle-fill me-2 fs-5"></i> Foods to Limit
+                            </h5>
+                            <ul class="list-unstyled mb-0">
+                                {% for item in recommendations.foods_to_limit %}
+                                <li class="food-item-divider">
+                                    <strong class="d-block text-dark">{{ item.name }}</strong>
+                                    <div class="small text-muted mb-1">{{ item.detail }}</div>
+                                    <span class="food-reason-tag bg-warning-subtle text-warning-emphasis">{{ item.reason }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foods to Avoid -->
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 food-card food-card-avoid">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-danger mb-3 d-flex align-items-center">
+                                <i class="bi bi-x-circle-fill me-2 fs-5"></i> Foods to Avoid
+                            </h5>
+                            <ul class="list-unstyled mb-0">
+                                {% for item in recommendations.foods_to_avoid %}
+                                <li class="food-item-divider">
+                                    <strong class="d-block text-dark">{{ item.name }}</strong>
+                                    <div class="small text-muted mb-1">{{ item.detail }}</div>
+                                    <span class="food-reason-tag bg-danger-subtle text-danger">{{ item.danger }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1-Day Sample Meal Plan -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body p-4 p-md-5">
+                    <h5 class="fw-bold text-dark mb-3 d-flex align-items-center">
+                        <i class="bi bi-calendar2-range text-primary me-2"></i> 1-Day Sample South Indian Meal Plan
+                    </h5>
+                    <p class="text-secondary small mb-4">
+                        Curated specifically for <strong>{{ recommendations.user_summary.food_type }}</strong> individuals aiming to <strong>{{ recommendations.user_summary.goal }}</strong>.
+                    </p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle mb-0">
+                            <thead class="table-light small">
+                                <tr>
+                                    <th style="width: 25%;">Meal Period</th>
+                                    <th>Recommended Menu Items</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-semibold text-dark">
+                                        <i class="bi bi-sunrise text-warning me-2"></i> Breakfast
+                                    </td>
+                                    <td>{{ recommendations.meal_plan.breakfast }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold text-dark">
+                                        <i class="bi bi-sun text-warning-emphasis me-2"></i> Lunch
+                                    </td>
+                                    <td>{{ recommendations.meal_plan.lunch }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold text-dark">
+                                        <i class="bi bi-cup-hot text-danger me-2"></i> Evening Snack
+                                    </td>
+                                    <td>{{ recommendations.meal_plan.snack }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold text-dark">
+                                        <i class="bi bi-moon-stars text-primary me-2"></i> Dinner
+                                    </td>
+                                    <td>{{ recommendations.meal_plan.dinner }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Healthy Eating Tips -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body p-4 p-md-5">
+                    <h5 class="fw-bold text-dark mb-3 d-flex align-items-center">
+                        <i class="bi bi-lightbulb text-warning me-2"></i> Healthy Eating Tips & Habits
+                    </h5>
+                    <div class="row g-3">
+                        {% for tip in recommendations.tips %}
+                        <div class="col-md-6">
+                            <div class="p-3 rounded-3 bg-light h-100 border">
+                                <h6 class="fw-bold text-dark mb-2">
+                                    <i class="bi bi-check2-circle text-success me-1"></i> {{ tip.title }}
+                                </h6>
+                                <p class="small text-secondary mb-0">{{ tip.desc }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}Quick Check - Diabetes Risk Questionnaire{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <!-- Card Header -->
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <a href="{{ url_for('index') }}" class="btn btn-sm btn-outline-secondary rounded-pill">
+                    <i class="bi bi-arrow-left me-1"></i> Back
+                </a>
+                <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-2 rounded-pill">
+                    Quick Assessment Mode
+                </span>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="app-card p-3 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-bold small text-dark"><i class="bi bi-list-check me-1"></i> Questionnaire Progress</span>
+                    <span id="answered-count" class="badge bg-secondary-subtle text-secondary">0 of 13 completed</span>
+                </div>
+                <div class="progress-stepper">
+                    <div id="questionnaire-progress" class="progress-stepper-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Questionnaire Form -->
+            <form id="questionnaire-form" action="{{ url_for('quick_check') }}" method="POST" class="app-card p-4 p-md-5">
+
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold">Lifestyle & Symptoms Questionnaire</h3>
+                    <p class="text-muted small mb-3">Please answer each question honestly. All information remains on your local machine.</p>
+                    <button type="button" id="fill-sample-btn" class="btn btn-sm btn-outline-primary rounded-pill px-3 shadow-sm">
+                        <i class="bi bi-magic me-1"></i> Fill Sample Data (Demo)
+                    </button>
+                </div>
+
+                <!-- Section: Personal Info -->
+                <div class="border-bottom pb-4 mb-4">
+                    <h6 class="text-primary text-uppercase fw-bold small mb-3">
+                        <i class="bi bi-person-badge me-1"></i> 1. Personal & Body Metrics
+                    </h6>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-semibold">Your Name (Optional)</label>
+                        <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="e.g. Alex" value="">
+                    </div>
+
+                    <div class="row g-3">
+                        <!-- Q1: Age -->
+                        <div class="col-md-6">
+                            <label for="age" class="form-label fw-semibold">1. Age (years) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="age" name="age" min="10" max="110" placeholder="e.g. 42" required>
+                            <div class="form-text">Diabetes risk naturally increases with age.</div>
+                        </div>
+
+                        <!-- Q2: Gender -->
+                        <div class="col-md-6">
+                            <label for="gender" class="form-label fw-semibold">2. Gender <span class="text-danger">*</span></label>
+                            <select class="form-select" id="gender" name="gender" required>
+                                <option value="" disabled selected>Select gender...</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other / Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Q3: Height & Weight (Auto BMI) -->
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6">
+                            <label for="height" class="form-label fw-semibold">3a. Height (cm) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="height" name="height" min="100" max="250" placeholder="e.g. 172" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="weight" class="form-label fw-semibold">3b. Weight (kg) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="weight" name="weight" min="30" max="250" step="0.5" placeholder="e.g. 74" required>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic BMI Pill with Tooltip -->
+                    <div class="mt-3 p-3 bg-light rounded-3 d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small">
+                                Calculated Body Mass Index (BMI):
+                                <i class="bi bi-info-circle text-primary ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Body Mass Index measures body fat based on height and weight: weight (kg) / height (m)²."></i>
+                            </span>
+                            <div class="d-flex align-items-center">
+                                <span class="fs-4 fw-bold text-dark me-2" id="bmi-display">--</span>
+                                <span id="bmi-badge" class="badge" style="display: none;"></span>
+                            </div>
+                        </div>
+                        <small class="text-muted text-end">Healthy: 18.5 - 24.9<br>Overweight: ≥ 25.0</small>
+                    </div>
+                </div>
+
+                <!-- Section: Health History & Habits -->
+                <div class="border-bottom pb-4 mb-4">
+                    <h6 class="text-primary text-uppercase fw-bold small mb-3">
+                        <i class="bi bi-heart-pulse me-1"></i> 2. Family & General Health
+                    </h6>
+
+                    <!-- Q4: Family History with Tooltip -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold d-block">
+                            4. Does anyone in your family (parents or siblings) have diabetes? <span class="text-danger">*</span>
+                            <i class="bi bi-info-circle text-primary ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Having a parent or sibling with diabetes significantly raises your genetic risk factor."></i>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="family_history" id="fam_yes" value="yes" required>
+                                <label class="radio-card-label" for="fam_yes"><i class="bi bi-check2-circle text-danger me-1"></i> Yes</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="family_history" id="fam_no" value="no" required>
+                                <label class="radio-card-label" for="fam_no"><i class="bi bi-x-circle text-success me-1"></i> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q11: Exercise with Tooltip -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold d-block">
+                            11. Do you exercise or walk for at least 30 minutes a day? <span class="text-danger">*</span>
+                            <i class="bi bi-info-circle text-primary ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="At least 30 minutes of daily activity helps muscles absorb sugar from the blood independent of insulin."></i>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="exercise_daily" id="ex_yes" value="yes" required>
+                                <label class="radio-card-label" for="ex_yes"><i class="bi bi-check2-circle text-success me-1"></i> Yes</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="exercise_daily" id="ex_no" value="no" required>
+                                <label class="radio-card-label" for="ex_no"><i class="bi bi-x-circle text-danger me-1"></i> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q12: High Blood Pressure with Tooltip -->
+                    <div class="mb-2">
+                        <label class="form-label fw-semibold d-block">
+                            12. Have you ever been diagnosed with high blood pressure (Hypertension)? <span class="text-danger">*</span>
+                            <i class="bi bi-info-circle text-primary ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Hypertension often co-exists with insulin resistance and elevates cardiovascular strain."></i>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="high_bp" id="bp_yes" value="yes" required>
+                                <label class="radio-card-label" for="bp_yes"><i class="bi bi-check2-circle text-danger me-1"></i> Yes</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="high_bp" id="bp_no" value="no" required>
+                                <label class="radio-card-label" for="bp_no"><i class="bi bi-x-circle text-success me-1"></i> No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Common Warning Symptoms -->
+                <div class="mb-4">
+                    <h6 class="text-primary text-uppercase fw-bold small mb-3">
+                        <i class="bi bi-exclamation-triangle me-1"></i> 3. Everyday Physical Symptoms
+                    </h6>
+
+                    <!-- Q5: Thirst -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold d-block">
+                            5. Do you feel very thirsty often, even after drinking plenty of water? <span class="text-danger">*</span>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="frequent_thirst" id="thirst_yes" value="yes" required>
+                                <label class="radio-card-label" for="thirst_yes"><i class="bi bi-check2-circle text-danger me-1"></i> Yes</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="frequent_thirst" id="thirst_no" value="no" required>
+                                <label class="radio-card-label" for="thirst_no"><i class="bi bi-x-circle text-success me-1"></i> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q6: Urination -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold d-block">
+                            6. Do you urinate more than usual, especially waking up during the night? <span class="text-danger">*</span>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="frequent_urination" id="urin_yes" value="yes" required>
+                                <label class="radio-card-label" for="urin_yes"><i class="bi bi-check2-circle text-danger me-1"></i> Yes</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="frequent_urination" id="urin_no" value="no" required>
+                                <label class="radio-card-label" for="urin_no"><i class="bi bi-x-circle text-success me-1"></i> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q7: Fatigue -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold d-block">
+                            7. Do you feel tired or weak most of the time without clear reason? <span class="text-danger">*</span>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="fatigue" id="fat_yes" value="yes" required>
+                                <label class="radio-card-label" for="fat_yes"><i class="bi bi-check2-circle text-danger me-1"></i> Yes</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="fatigue" id="fat_no" value="no" required>
+                                <label class="radio-card-label" for="fat_no"><i class="bi bi-x-circle text-success me-1"></i> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q8: Unexplained Weight Loss -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold d-block">
+                            8. Have you lost noticeable weight recently without dieting or trying? <span class="text-danger">*</span>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="unexplained_weight_loss" id="loss_yes" value="yes" required>
+                                <label class="radio-card-label" for="loss_yes"><i class="bi bi-check2-circle text-danger me-1"></i> Yes</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="unexplained_weight_loss" id="loss_no" value="no" required>
+                                <label class="radio-card-label" for="loss_no"><i class="bi bi-x-circle text-success me-1"></i> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q9: Slow Healing -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold d-block">
+                            9. Do cuts, bruises, or wounds take an unusually long time to heal? <span class="text-danger">*</span>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="slow_healing" id="heal_yes" value="yes" required>
+                                <label class="radio-card-label" for="heal_yes"><i class="bi bi-check2-circle text-danger me-1"></i> Yes</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="slow_healing" id="heal_no" value="no" required>
+                                <label class="radio-card-label" for="heal_no"><i class="bi bi-x-circle text-success me-1"></i> No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q10: Blurry Vision -->
+                    <div class="mb-2">
+                        <label class="form-label fw-semibold d-block">
+                            10. Do you experience blurry or hazy vision from time to time? <span class="text-danger">*</span>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="blurry_vision" id="blur_yes" value="yes" required>
+                                <label class="radio-card-label" for="blur_yes"><i class="bi bi-check2-circle text-danger me-1"></i> Yes</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" class="btn-check" name="blurry_vision" id="blur_no" value="no" required>
+                                <label class="radio-card-label" for="blur_no"><i class="bi bi-x-circle text-success me-1"></i> No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disclaimer Alert -->
+                <div class="disclaimer-box mb-4">
+                    <i class="bi bi-info-circle-fill me-1"></i>
+                    <strong>Important:</strong> This is a lifestyle screener, not a diagnostic test. Please click "Calculate Risk" to view your risk level and personalized tips.
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-semibold py-3 shadow">
+                        <i class="bi bi-clipboard2-pulse me-2"></i> Calculate My Diabetes Risk
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

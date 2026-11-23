@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}DiaGuard - Diabetes Risk Prediction System{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-gradient">
+    <div class="container text-center py-4">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold mb-3">
+            <i class="bi bi-activity me-1"></i> Fast, Accessible, Evidence-Informed
+        </span>
+        <h1 class="display-5 fw-extrabold text-dark mb-3">
+            Predict & Prevent Your <span class="text-primary">Diabetes Risk</span>
+        </h1>
+        <p class="lead text-secondary mx-auto mb-4" style="max-width: 680px;">
+            Evaluate your early warning indicators in under 2 minutes. Choose our simple, plain-language lifestyle questionnaire or enter clinical lab values powered by machine learning.
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="{{ url_for('quick_check') }}" class="btn btn-primary btn-lg px-4 shadow-sm rounded-pill">
+                <i class="bi bi-clipboard2-check me-2"></i> Start Quick Check
+            </a>
+            <a href="{{ url_for('detailed_check') }}" class="btn btn-outline-dark btn-lg px-4 rounded-pill">
+                <i class="bi bi-cpu me-2"></i> Detailed Lab Check
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Assessment Options -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Choose Your Assessment Mode</h2>
+        <p class="text-muted">Designed for everyday users without medical jargon, as well as laboratory testing.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Quick Check Option -->
+        <div class="col-md-6 col-lg-5">
+            <div class="card app-card interactive-card h-100 p-4 border-primary border-opacity-25">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="brand-icon me-3" style="width: 50px; height: 50px; font-size: 1.5rem; background: #2563eb;">
+                        <i class="bi bi-person-walking"></i>
+                    </div>
+                    <div>
+                        <span class="badge bg-success-subtle text-success fw-bold">RECOMMENDED FOR EVERYONE</span>
+                        <h4 class="fw-bold mb-0 mt-1">Quick Check</h4>
+                    </div>
+                </div>
+                <p class="text-muted flex-grow-1">
+                    No clinical reports or blood tests required! Answer 12 intuitive questions about your everyday habits, family history, and physical symptoms with automatic BMI calculation.
+                </p>
+                <div class="bg-light p-3 rounded-3 mb-4 small text-secondary">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span><i class="bi bi-clock me-1"></i> Time needed:</span>
+                        <strong>1-2 minutes</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span><i class="bi bi-question-circle me-1"></i> Questions:</span>
+                        <strong>12 Plain-Language</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span><i class="bi bi-gear-wide-connected me-1"></i> Methodology:</span>
+                        <strong>Clinical Screener Protocol</strong>
+                    </div>
+                </div>
+                <a href="{{ url_for('quick_check') }}" class="btn btn-primary w-100 py-2 rounded-pill fw-semibold">
+                    Start Quick Questionnaire <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Detailed Check Option -->
+        <div class="col-md-6 col-lg-5">
+            <div class="card app-card interactive-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="brand-icon me-3" style="width: 50px; height: 50px; font-size: 1.5rem; background: #4f46e5;">
+                        <i class="bi bi-cpu-fill"></i>
+                    </div>
+                    <div>
+                        <span class="badge bg-primary-subtle text-primary fw-bold">AI MACHINE LEARNING</span>
+                        <h4 class="fw-bold mb-0 mt-1">Detailed Check</h4>
+                    </div>
+                </div>
+                <p class="text-muted flex-grow-1">
+                    Ideal if you have recent laboratory reports (Glucose, Blood Pressure, Insulin). Powered by a Random Forest Classifier trained on the Pima Indians Diabetes Dataset.
+                </p>
+                <div class="bg-light p-3 rounded-3 mb-4 small text-secondary">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span><i class="bi bi-award me-1"></i> Model:</span>
+                        <strong>{{ best_model_name }}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span><i class="bi bi-check-circle me-1"></i> Model Accuracy:</span>
+                        <strong>{{ model_accuracy }}%</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span><i class="bi bi-database me-1"></i> Dataset:</span>
+                        <strong>Pima Indians Database</strong>
+                    </div>
+                </div>
+                <a href="{{ url_for('detailed_check') }}" class="btn btn-outline-primary w-100 py-2 rounded-pill fw-semibold">
+                    Enter Lab Values <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features strip -->
+    <div class="row g-4 mt-5 text-center">
+        <div class="col-md-4">
+            <div class="p-3">
+                <div class="text-primary fs-3 mb-2"><i class="bi bi-calculator"></i></div>
+                <h5 class="fw-bold">Automatic BMI Metric</h5>
+                <p class="text-muted small">Input height & weight in centimeters and kilograms to compute BMI and category instantly in real-time.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3">
+                <div class="text-success fs-3 mb-2"><i class="bi bi-card-checklist"></i></div>
+                <h5 class="fw-bold">Actionable Guidance</h5>
+                <p class="text-muted small">Receive tailored diet modifications, physical activity suggestions, and recommendations on when to consult a physician.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3">
+                <div class="text-warning fs-3 mb-2"><i class="bi bi-database-check"></i></div>
+                <h5 class="fw-bold">Saved Assessment Logs</h5>
+                <p class="text-muted small">Locally store assessments in a lightweight SQLite database to monitor personal health indicators over time.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

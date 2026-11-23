@@ -1,0 +1,96 @@
+{
+  "foods_to_eat_more": {
+    "base": [
+      {"name": "Whole Grains & Millets", "detail": "Ragi (finger millet), Foxtail millet (Thinai), Kodo millet (Varagu), whole wheat chapati, oats", "benefit": "High soluble fiber retards carbohydrate breakdown and stabilizes postprandial glucose"},
+      {"name": "Pulses & Dhal", "detail": "Toor dhal sambar, moong dhal kootu, sprouted green gram, chana sundal, rajma", "benefit": "Plant protein and dietary fiber enhance satiety and curb insulin spikes"},
+      {"name": "Vegetables & Greens", "detail": "Keerai (spinach/amaranth) poriyal, moringa (drumstick leaves), bitter gourd (pavakkai), ridge gourd, cabbage, beans", "benefit": "Micronutrients, polyphenols and near-zero glycemic impact"},
+      {"name": "Healthy Hydration & Fermented", "detail": "Fresh buttermilk (mor with curry leaves and ginger), tender coconut water (moderate), rasam, lemon water", "benefit": "Aids digestion, cools metabolism and maintains electrolyte balance"}
+    ],
+    "non_veg": [
+      {"name": "Lean Proteins", "detail": "Country chicken breast (curry with less oil / grilled), steamed fish (nethili / vanjaram / rohu in light tamarind gravy)", "benefit": "High biological value protein without saturated animal fat"}
+    ],
+    "egg": [
+      {"name": "Eggs", "detail": "Boiled eggs or egg-white vegetable omelette with black pepper and onions", "benefit": "Rich in choline, protein, and zero glycemic impact"}
+    ]
+  },
+  "foods_to_limit": [
+    {"name": "Polished White Rice & Normal Dosa/Idli", "detail": "Limit white ponni rice to 1 small cup; cap regular idli to 2-3 pieces or dosa to 1-2 thin dosas.", "reason": "High glycemic index quickly converts to simple glucose in bloodstream"},
+    {"name": "Coconut Chutney & Heavy Oil Tadka", "detail": "Limit to 1 tablespoon; substitute with tomato-onion or mint-coriander chutney.", "reason": "Saturated fat density when consumed in high volume"},
+    {"name": "Sweetened Filter Coffee & Tea", "detail": "Restrict to 1 small cup daily with zero sugar or minimal cow milk.", "reason": "Frequent tea/coffee sugar loads spike daily caloric and insulin burden"},
+    {"name": "High-sugar Fruits", "detail": "Limit mangoes, sapota (chikoo), jackfruit and grapes to tiny occasional portions.", "reason": "Fructose density raises blood glucose when taken without fiber"}
+  ],
+  "foods_to_avoid": [
+    {"name": "Traditional South Indian Sweets", "detail": "Mysore pak, laddu, gulab jamun, jangiri, semiya payasam, halwa", "danger": "Extremely high refined white sugar and saturated ghee content"},
+    {"name": "Deep-Fried Street & Tiffin Items", "detail": "Medu vada, bajji, bonda, samosa, pakoda, commercial potato chips", "danger": "Trans fats and reheated oils aggravate insulin resistance and vascular strain"},
+    {"name": "Sugary & Carbonated Beverages", "detail": "Commercial soft drinks, sweetened fruit juices, condensed milk beverages, energy drinks", "danger": "Liquid simple sugars absorb immediately and trigger acute glucose spikes"},
+    {"name": "Ultra-Processed Bakery Items", "detail": "Maida parotta, white bread, cream biscuits, pastries, puffs", "danger": "Refined flour (maida) strips digestive fiber and promotes abdominal adiposity"}
+  ],
+  "meal_plans": {
+    "Vegetarian": {
+      "Prevent diabetes": {
+        "breakfast": "2 Ragi or Millet Idlis with vegetable sambar (drumstick/brinjal) and mint coriander chutney",
+        "lunch": "1 cup Brown rice or Foxtail millet + 1 cup Toor dhal sambar + 1 cup Keerai poriyal + 1 cup cucumber koshambari + fresh spiced buttermilk",
+        "snack": "1 small cup boiled sundal (sprouted chickpeas with mustard seeds and curry leaves) + sugarless green tea",
+        "dinner": "2 Whole wheat phulkas/chapatis + vegetable kootu (bottle gourd / ridge gourd) + small bowl of curd"
+      },
+      "Control sugar": {
+        "breakfast": "Ragi adai or vegetable oats upma with plenty of carrots and green peas + light tomato chutney",
+        "lunch": "Kodo millet (Varagu) or small portion brown rice + bitter gourd (pavakkai) pitlai + rich toor dhal rasam + cabbage poriyal + diluted buttermilk",
+        "snack": "Roasted makhana or boiled moong sprouts with lemon squeeze + ginger herbal infusion (no sugar)",
+        "dinner": "2 Multigrain / Jowar rotis + paneer & spinach sabzi (made with minimal oil) + clear vegetable soup"
+      },
+      "Lose weight": {
+        "breakfast": "Moong dhal chilla (pesarattu) with ginger-coriander chutney + 1 cup black coffee / warm lemon water",
+        "lunch": "Large cucumber, tomato & sprout salad + 1 small cup millet rice + drumstick leaves sambar + broad beans poriyal + 1 glass thin buttermilk",
+        "snack": "Cucumber sticks with roasted flaxseed powder + warm cinnamon green tea",
+        "dinner": "1 whole wheat chapati or small bowl of ragi malt (savory with salt & buttermilk) + boiled vegetable salad"
+      }
+    },
+    "Non-vegetarian": {
+      "Prevent diabetes": {
+        "breakfast": "2 Multigrain idlis or 1 ragi dosa with sambar and 1 boiled egg white",
+        "lunch": "1 cup Brown rice + South Indian fish curry (meen kulambu with tamarind, tomato and fenugreek) + ladies finger poriyal + fresh buttermilk",
+        "snack": "Handful of roasted unsalted groundnuts / almonds + black tea with lemon",
+        "dinner": "2 Chapatis + country chicken breast pepper gravy (cooked in minimal sesame oil) + sliced cucumber salad"
+      },
+      "Control sugar": {
+        "breakfast": "Vegetable & egg white bhurji (2 egg whites) with 1 whole wheat toast or 1 small multigrain uthappam",
+        "lunch": "1 cup Foxtail millet or quinoa + grilled/steamed local fish fillet + rich vegetable rasam + snake gourd kootu",
+        "snack": "Boiled black chana sundal + cup of black coffee without sugar",
+        "dinner": "2 Ragi rotis + chicken clear vegetable broth + stir-fried beans and broccoli"
+      },
+      "Lose weight": {
+        "breakfast": "2 Boiled eggs (1 whole + 1 white) + warm vegetable soup with pepper and cumin",
+        "lunch": "Generous garden salad with lemon dressing + steamed fish or grilled chicken breast + small bowl of toor dhal rasam",
+        "snack": "Boiled sprouted horse gram (kollu sundal - exceptional for weight management) + green tea",
+        "dinner": "1 Phulka / Multigrain roti + shredded chicken breast stir-fry with capsicum and greens + clear soup"
+      }
+    },
+    "Eggetarian": {
+      "Prevent diabetes": {
+        "breakfast": "2 Vegetable idlis with sambar + 1 hard boiled egg sprinkled with black pepper",
+        "lunch": "1 cup Brown rice + toor dhal sambar + cluster beans (kothavarangai) poriyal + 1 egg white omelette with onions",
+        "snack": "Roasted chana with curry leaves + warm herbal tea",
+        "dinner": "2 Whole wheat chapatis + egg podimas (scramble made with green chillies, curry leaves, onions) + cucumber raita"
+      },
+      "Control sugar": {
+        "breakfast": "Oats / Ragi vegetable upma with 2 boiled egg whites on the side + mint tea",
+        "lunch": "1 cup Little millet (samai) + mixed vegetable dhal kootu + keerai masiyal + 1 boiled egg",
+        "snack": "Sprouted green gram salad + sugarless black filter coffee",
+        "dinner": "2 Multigrain rotis + spicy egg curry in light tomato-onion gravy (no coconut) + bowl of steamed veggies"
+      },
+      "Lose weight": {
+        "breakfast": "Egg white vegetable omelette (2 whites) loaded with mushrooms, onions, and tomatoes + green tea",
+        "lunch": "Big bowl of sprouted sundal salad + 1 small cup millet + rasam + 1 boiled egg + spiced buttermilk",
+        "snack": "Cucumber and carrot slices + 1 boiled egg white",
+        "dinner": "1 Whole wheat chapati + egg white scrambled bhurji with bell peppers + warm clear soup"
+      }
+    }
+  },
+  "healthy_eating_tips": [
+    {"title": "The South Indian Healthy Plate Rule", "desc": "Fill 50% of your plate with cooked vegetables/greens (poriyal, kootu, salad), 25% with protein (dhal, sundal, eggs, fish), and only 25% with carbs (rice, chapati, idli)."},
+    {"title": "15-Minute Post-Meal Walk (Shatapawali)", "desc": "Take a gentle 10 to 15-minute walk within 30 minutes after major meals. This activates large leg muscles to pull glucose from the blood without demanding extra insulin."},
+    {"title": "Proper Water Timing", "desc": "Drink 2.5 to 3 liters of water daily. Avoid gulping large amounts during meals; drink a glass 30 minutes before eating to aid satiety and digestive fire."},
+    {"title": "Smart Carbohydrate Sequencing", "desc": "Eat fiber (salad/greens) and protein (dhal/egg/meat) FIRST, and rice/chapatis LAST. This significantly flattens post-meal glucose and insulin peaks."}
+  ]
+}

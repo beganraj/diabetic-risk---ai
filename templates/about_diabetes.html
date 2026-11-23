@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}About Diabetes - DiaGuard.ai{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="row justify-content-center text-center mb-4">
+        <div class="col-lg-8">
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1 rounded-pill fw-semibold mb-2">
+                <i class="bi bi-book-half me-1"></i> Patient Health Education
+            </span>
+            <h1 class="h2 fw-bold text-dark">Understanding Diabetes Mellitus</h1>
+            <p class="text-muted">
+                A simple, plain-language guide to blood glucose, how insulin works in the body, the key differences between types, and practical daily prevention steps.
+            </p>
+        </div>
+    </div>
+
+    <!-- Medical Disclaimer Alert -->
+    <div class="alert alert-warning border-warning-subtle d-flex align-items-center py-2 px-3 rounded-3 mb-4 shadow-sm" role="alert">
+        <i class="bi bi-info-circle-fill text-warning fs-5 me-2 flex-shrink-0"></i>
+        <div class="small">
+            <strong>Medical Disclaimer:</strong> This is not a medical diagnosis. Please consult a doctor for official clinical diagnosis and treatment.
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- 1. What is Diabetes -->
+        <div class="col-md-6 col-lg-6">
+            <div class="card app-card h-100 p-4 border-start border-4 border-primary">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="brand-icon me-3" style="background:#dbeafe; color:#2563eb; width:48px; height:48px; font-size:1.4rem;">
+                        <i class="bi bi-droplet-half"></i>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0">What is Diabetes?</h4>
+                        <small class="text-muted">Glucose & Insulin balance</small>
+                    </div>
+                </div>
+                <p class="text-secondary small">
+                    When we eat, our digestive system breaks food down into <strong>glucose</strong> (blood sugar), which enters the bloodstream. The pancreas produces a vital hormone called <strong>insulin</strong>, which acts like a key, allowing cells to absorb glucose and use it for energy.
+                </p>
+                <p class="text-secondary small mb-0">
+                    In diabetes, the body either doesn't make enough insulin or can't use the insulin it makes effectively. This causes glucose to build up in the bloodstream over time, potentially leading to long-term health complications if left unmanaged.
+                </p>
+            </div>
+        </div>
+
+        <!-- 2. Type 1 vs Type 2 -->
+        <div class="col-md-6 col-lg-6">
+            <div class="card app-card h-100 p-4 border-start border-4 border-info">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="brand-icon me-3" style="background:#e0f2fe; color:#0284c7; width:48px; height:48px; font-size:1.4rem;">
+                        <i class="bi bi-arrow-left-right"></i>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0">Type 1 vs. Type 2 Diabetes</h4>
+                        <small class="text-muted">Key clinical differences</small>
+                    </div>
+                </div>
+                <div class="row g-2 small">
+                    <div class="col-sm-6">
+                        <div class="p-2 rounded bg-light border">
+                            <strong class="text-primary d-block mb-1"><i class="bi bi-1-circle me-1"></i> Type 1 Diabetes:</strong>
+                            <ul class="ps-3 mb-0 text-muted">
+                                <li>Autoimmune condition where the body stops making insulin.</li>
+                                <li>Usually diagnosed in children and young adults.</li>
+                                <li>Requires daily insulin therapy.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="p-2 rounded bg-light border">
+                            <strong class="text-success d-block mb-1"><i class="bi bi-2-circle me-1"></i> Type 2 Diabetes:</strong>
+                            <ul class="ps-3 mb-0 text-muted">
+                                <li>Cells become resistant to insulin (insulin resistance).</li>
+                                <li>Accounts for 90-95% of all cases worldwide.</li>
+                                <li>Closely linked to lifestyle, diet, weight, and genetics.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Common Symptoms -->
+        <div class="col-md-6 col-lg-6">
+            <div class="card app-card h-100 p-4 border-start border-4 border-warning">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="brand-icon me-3" style="background:#fef3c7; color:#d97706; width:48px; height:48px; font-size:1.4rem;">
+                        <i class="bi bi-exclamation-octagon"></i>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0">Common Warning Symptoms</h4>
+                        <small class="text-muted">Early signs to watch out for</small>
+                    </div>
+                </div>
+                <ul class="text-secondary small ps-3 mb-0">
+                    <li class="mb-2"><strong>Frequent Urination (Polyuria):</strong> Needing to urinate often, especially waking up multiple times during the night.</li>
+                    <li class="mb-2"><strong>Excessive Thirst (Polydipsia):</strong> Feeling persistently thirsty even after drinking plenty of fluids.</li>
+                    <li class="mb-2"><strong>Unexplained Fatigue:</strong> Feeling worn out and lethargic because cells aren't getting enough usable energy.</li>
+                    <li class="mb-2"><strong>Blurry Vision:</strong> High sugar levels draw fluid from eye lenses, making focusing difficult.</li>
+                    <li><strong>Slow-Healing Cuts:</strong> Minor scrapes, wounds, or sores that take longer than normal to heal.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. Prevention Tips -->
+        <div class="col-md-6 col-lg-6">
+            <div class="card app-card h-100 p-4 border-start border-4 border-success">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="brand-icon me-3" style="background:#dcfce7; color:#10b981; width:48px; height:48px; font-size:1.4rem;">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0">Practical Prevention Tips</h4>
+                        <small class="text-muted">Simple habits that lower Type 2 risk</small>
+                    </div>
+                </div>
+                <ul class="text-secondary small ps-3 mb-0">
+                    <li class="mb-2"><strong>Stay Active Daily:</strong> Aim for at least 30 minutes of moderate exercise (brisk walking, cycling, or yoga) 5 days a week.</li>
+                    <li class="mb-2"><strong>Choose Whole Foods:</strong> Replace refined white flour, white rice, and sugary sodas with whole grains, lentils, green vegetables, and nuts.</li>
+                    <li class="mb-2"><strong>Maintain a Healthy Weight:</strong> Losing just 5-7% of excess body weight can reduce Type 2 diabetes risk by more than 50%.</li>
+                    <li class="mb-2"><strong>Stay Well Hydrated:</strong> Drink clean water instead of fruit juices with added sugar, sweet teas, or energy drinks.</li>
+                    <li><strong>Get Screened Periodically:</strong> Regular fasting blood glucose checks help catch pre-diabetes early when it is still reversible.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick CTA banner -->
+    <div class="p-4 rounded-4 bg-light border mt-4 text-center">
+        <h5 class="fw-bold mb-1">Want to know your personal risk?</h5>
+        <p class="text-muted small mb-3">Take our non-invasive 12-question lifestyle screener in under 2 minutes.</p>
+        <a href="{{ url_for('quick_check') }}" class="btn btn-primary rounded-pill px-4 shadow-sm">
+            <i class="bi bi-clipboard2-check me-1"></i> Start Quick Check
+        </a>
+    </div>
+</div>
+{% endblock %}

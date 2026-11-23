@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Frequently Asked Questions (FAQ) - DiaGuard.ai{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="row justify-content-center text-center mb-4">
+        <div class="col-lg-8">
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1 rounded-pill fw-semibold mb-2">
+                <i class="bi bi-question-circle me-1"></i> Patient & User Help
+            </span>
+            <h1 class="h2 fw-bold text-dark">Frequently Asked Questions</h1>
+            <p class="text-muted">
+                Clear and honest answers about how this system works, how accurate it is, and how your personal health data is handled.
+            </p>
+        </div>
+    </div>
+
+    <!-- Medical Disclaimer Alert -->
+    <div class="alert alert-warning border-warning-subtle d-flex align-items-center py-2 px-3 rounded-3 mb-4 shadow-sm" role="alert">
+        <i class="bi bi-info-circle-fill text-warning fs-5 me-2 flex-shrink-0"></i>
+        <div class="small">
+            <strong>Medical Disclaimer:</strong> This is not a medical diagnosis. Please consult a doctor. This application is an educational early screening aid.
+        </div>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <div class="accordion app-card p-3 p-md-4 shadow-sm border" id="faqAccordion">
+
+                <!-- Q1: Accuracy -->
+                <div class="accordion-item border-0 mb-3 rounded-3 bg-light overflow-hidden">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button fw-bold text-dark bg-light shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="bi bi-bullseye text-primary me-2"></i> 1. Is this prediction accurate?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-secondary small pt-0">
+                            Our machine learning model is trained on clinical data and achieves approximately <strong>75%–80% testing accuracy</strong>. However, predictions are statistical estimates of risk based on general patterns—they are <em>screening indicators</em>, not laboratory diagnoses. A low score does not guarantee immunity, and a high score does not mean you definitely have diabetes.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2: Data Privacy -->
+                <div class="accordion-item border-0 mb-3 rounded-3 bg-light overflow-hidden">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed fw-bold text-dark bg-light shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="bi bi-shield-lock text-success me-2"></i> 2. Is my data saved or shared?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-secondary small pt-0">
+                            Assessment results are stored strictly in a local SQLite database on this server for the History table and your optional PDF report download. <strong>We do not share, sell, or transmit your personal details to third parties or cloud servers</strong>. You can clear your assessment history at any time from the History page.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3: Can this replace a doctor -->
+                <div class="accordion-item border-0 mb-3 rounded-3 bg-light overflow-hidden">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed fw-bold text-dark bg-light shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="bi bi-hospital text-danger me-2"></i> 3. Can this tool replace a doctor or clinical test?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-secondary small pt-0">
+                            <strong>No, absolutely not.</strong> This tool is developed strictly for educational screening and preventive health awareness. Clinical diabetes can only be confirmed through certified laboratory diagnostic tests ordered by a physician, such as Fasting Plasma Glucose (FPG), Oral Glucose Tolerance Test (OGTT), or an HbA1c blood test.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4: What is BMI -->
+                <div class="accordion-item border-0 mb-3 rounded-3 bg-light overflow-hidden">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed fw-bold text-dark bg-light shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <i class="bi bi-calculator text-info me-2"></i> 4. What is BMI and why is it important for diabetes?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-secondary small pt-0">
+                            <strong>Body Mass Index (BMI)</strong> is an indicator calculated from your height and weight (weight in kg / height in meters²). Excess body weight—especially when BMI is over 25 (Overweight) or 30 (Obese)—is one of the leading modifiable risk factors for Type 2 diabetes because excess fat tissue interferes with how effectively your cells respond to insulin.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q5: What if risk is high -->
+                <div class="accordion-item border-0 mb-3 rounded-3 bg-light overflow-hidden">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed fw-bold text-dark bg-light shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <i class="bi bi-heart-pulse text-warning me-2"></i> 5. What should I do if my risk score comes back high?
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-secondary small pt-0">
+                            Do not panic! A high score simply indicates that you have multiple risk factors (such as BMI, age, symptoms, or genetic history). <strong>Schedule a checkup with a healthcare provider or diabetologist</strong> to get an official fasting blood glucose or HbA1c test. You can also download your summary PDF report to discuss it with your doctor.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q6: What data is used -->
+                <div class="accordion-item border-0 rounded-3 bg-light overflow-hidden">
+                    <h2 class="accordion-header" id="headingSix">
+                        <button class="accordion-button collapsed fw-bold text-dark bg-light shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <i class="bi bi-database text-primary me-2"></i> 6. What dataset is used to train the machine learning model?
+                        </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-secondary small pt-0">
+                            Our Detailed Lab Check classifier is trained on the benchmark <strong>Pima Indians Diabetes Database</strong> (National Institute of Diabetes and Digestive and Kidney Diseases). It includes 768 patient records with 8 clinical features (Glucose, Blood Pressure, Skin Thickness, Insulin, BMI, Diabetes Pedigree, and Age), preprocessed to impute missing values and normalized with standard scaling.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Still have questions footer card -->
+            <div class="p-3 bg-white rounded-3 border mt-4 text-center">
+                <span class="text-muted small">
+                    Have more questions? Review our full model architecture on the <a href="{{ url_for('about_model') }}" class="text-decoration-none fw-semibold">About Model page</a> or learn more on the <a href="{{ url_for('about_project') }}" class="text-decoration-none fw-semibold">About Project page</a>.
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
